@@ -1,4 +1,4 @@
-require('dotenv').config({ path: `${__dirname}/common.env`})
+//require('dotenv').config({ path: `${__dirname}/common.env`})
 
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -26,20 +26,16 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*"); //"https://wordleleague.sweeto.co.uk"); //"https://www.wordleleague.org");
-  res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
-  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Authorization, Content-Type');
   next();
-})
+});
 
 app.use("/api/data", dataRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/league", leagueRoutes);
 app.use("/api/messages", messagesRoutes);
 
-// try using the server to host the angular project.
-// app.use("", (req, res, next) => {
-//     res.sendFile(path.join(__dirname, "dist", "index.html"));
-// })
 
 module.exports = app;
