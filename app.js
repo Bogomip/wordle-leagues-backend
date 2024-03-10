@@ -12,8 +12,6 @@ const messagesRoutes = require('./routes/messages');
 
 const app = express();
 
-// app.use("/", express.static(path.join(__dirname, "dist")));
-
 mongoose.connect(process.env.MONGODB_URI)
 .then(() => {
   console.log('Connected to DB');
@@ -37,5 +35,8 @@ app.use("/api/user", userRoutes);
 app.use("/api/league", leagueRoutes);
 app.use("/api/messages", messagesRoutes);
 
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 module.exports = app;
