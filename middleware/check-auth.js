@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 
 // middleware simple returns a function...
 module.exports = (req, res, next) => {
+    console.log(req.headers);
     try {
         const token = req.headers.authorization.split(" ")[1];
         jwt.verify(token, process.env.SALT);

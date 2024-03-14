@@ -10,7 +10,17 @@ const userRoutes = require('./routes/user');
 const leagueRoutes = require('./routes/leagues');
 const messagesRoutes = require('./routes/messages');
 
+console.log(`loading...`);
+
 const app = express();
+
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Authorization, Content-Type');
+  console.log(res.header);
+  next();
+});
 
 mongoose.connect(process.env.MONGODB_URI)
 .then(() => {
@@ -23,20 +33,10 @@ mongoose.connect(process.env.MONGODB_URI)
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Authorization, Content-Type');
-  next();
-});
 
 app.use("/api/data", dataRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/league", leagueRoutes);
 app.use("/api/messages", messagesRoutes);
 
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
 module.exports = app;
